@@ -10,7 +10,7 @@ import (
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
-	"github.com/jgomezve/provider-aci/config/tenant"
+	"github.com/jgomezve/provider-aci/config/null"
 )
 
 const (
@@ -36,7 +36,7 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		tenant.Configure,
+		null.Configure,
 	} {
 		configure(pc)
 	}

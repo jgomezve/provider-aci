@@ -1,0 +1,16 @@
+apiVersion: tenant.aci.upbound.io/v1alpha1
+kind: Tenant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tenant/v1alpha1/tenant
+  labels:
+    testing.upbound.io/example-name: crossplane
+  name: crossplane
+spec:
+  forProvider:
+    annotation: crossplane
+    description: from Crossplane
+    nameAlias: tenant
+
+---
+

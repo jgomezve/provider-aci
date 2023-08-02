@@ -5,14 +5,14 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
-  name: providerconfigusages.template.upbound.io
+  name: providerconfigusages.aci.cisco
 spec:
-  group: template.upbound.io
+  group: aci.cisco
   names:
     categories:
     - crossplane
     - provider
-    - template
+    - aci
     kind: ProviderConfigUsage
     listKind: ProviderConfigUsageList
     plural: providerconfigusages

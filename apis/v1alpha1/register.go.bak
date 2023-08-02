@@ -13,7 +13,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "aci.cisco"
+	Group   = "aci.upbound.io"
 	Version = "v1alpha1"
 )
 

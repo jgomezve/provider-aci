@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-aci
 spec:
-  package: jgomezve/provider-aci:v0.1.0
+  package: upbound/provider-aci:v0.1.0
