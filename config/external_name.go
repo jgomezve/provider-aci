@@ -4,13 +4,19 @@ Copyright 2022 Upbound Inc.
 
 package config
 
-import "github.com/upbound/upjet/pkg/config"
+import (
+	"context"
+	"fmt"
+
+	"github.com/pkg/errors"
+	"github.com/upbound/upjet/pkg/config"
+)
 
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"aci_tenant": config.IdentifierFromProvider,
+	"aci_tenant": config.NameAsIdentifier,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
@@ -20,6 +26,8 @@ func ExternalNameConfigurations() config.ResourceOption {
 	return func(r *config.Resource) {
 		if e, ok := ExternalNameConfigs[r.Name]; ok {
 			r.ExternalName = e
+			r.ExternalName.GetIDFn = getFullyQualifiedIDfunc
+			r.ExternalName.GetExternalNameFn = getNameFromFullyQualifiedID
 		}
 	}
 }
@@ -35,4 +43,27 @@ func ExternalNameConfigured() []string {
 		i++
 	}
 	return l
+}
+
+func getFullyQualifiedIDfunc(ctx context.Context, externalName string, parameters map[string]any, providerConfig map[string]any) (string, error) {
+
+	name, ok := parameters["name"]
+	if !ok {
+		return "", errors.Errorf("", "name")
+	}
+
+	return fmt.Sprintf("uni/tn-%s", name), nil
+}
+
+func getNameFromFullyQualifiedID(tfstate map[string]any) (string, error) {
+	name, ok := tfstate["name"]
+	if !ok {
+		return "", errors.Errorf("", "id")
+	}
+	nameStr, ok := name.(string)
+	if !ok {
+		return "", errors.Errorf("", "id")
+	}
+
+	return nameStr, nil
 }

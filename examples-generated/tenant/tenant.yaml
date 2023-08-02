@@ -4,12 +4,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: tenant/v1alpha1/tenant
   labels:
-    testing.upbound.io/example-name: crossplane
-  name: crossplane
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    annotation: crossplane
-    description: from Crossplane
+    annotation: "orchestrator:mso"
+    description: from terraform
     nameAlias: tenant
 
 ---
